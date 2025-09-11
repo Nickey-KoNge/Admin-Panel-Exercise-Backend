@@ -24,7 +24,7 @@
 // }
 // src/modules/staff/dtos/create-attendance.dto.ts
 
-import { Type } from 'class-transformer'; // 1. Import Type
+import { Type } from 'class-transformer';
 import { IsDate, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateAttendanceDto {
@@ -37,12 +37,12 @@ export class CreateAttendanceDto {
   staff_id: number;
 
   @IsDate()
-  @Type(() => Date) // 2. Add this decorator
+  @Type(() => Date)
   @IsNotEmpty()
   check_in_time: Date;
 
   @IsDate()
-  @Type(() => Date) // 3. And add it here too
+  @Type(() => Date)
   @IsNotEmpty()
   check_out_time: Date;
 
