@@ -1,4 +1,4 @@
-//src/modules/staff/repositories/repositoriesImp/attendance.repository.impl.ts
+//src/modules/staff/attendance/repositories/repositoriesImp/attendance.repository.impl.ts
 
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -15,5 +15,15 @@ export class AttendanceRepositoryImpl implements IAttendanceRepository {
 
   async create(attendance: Partial<Attendance>): Promise<Attendance> {
     return this.repo.save(this.repo.create(attendance));
+  }
+  async findById(id: number): Promise<Attendance> {
+    return this.repo.findOneBy({ id });
+  }
+  async update(
+    id: number,
+    attendance: Partial<Attendance>,
+  ): Promise<Attendance> {
+    await this.repo.update(id, attendance);
+    return this.findById(id);
   }
 }

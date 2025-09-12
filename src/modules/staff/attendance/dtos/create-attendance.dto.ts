@@ -22,7 +22,7 @@
 //   @IsNotEmpty()
 //   status: string;
 // }
-// src/modules/staff/dtos/create-attendance.dto.ts
+// src/modules/staff/attendance/dtos/create-attendance.dto.ts
 
 import { Type } from 'class-transformer';
 import { IsDate, IsNotEmpty, IsNumber, IsString } from 'class-validator';

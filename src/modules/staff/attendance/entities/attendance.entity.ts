@@ -1,4 +1,4 @@
-//src/modules/staff/entities/attendance.entity.ts
+//src/modules/staff/attendance/entities/attendance.entity.ts
 import { IsNotEmpty } from 'class-validator';
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 

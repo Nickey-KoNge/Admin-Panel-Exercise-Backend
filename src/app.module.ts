@@ -2,8 +2,10 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import databaseConfig from './config/database.config';
-import { Attendance } from './modules/staff/entities/attendance.entity';
+import { Attendance } from './modules/staff/attendance/entities/attendance.entity';
 import { AttendanceModule } from './modules/staff/attendance.module';
+import { LeaveRequestModule } from './modules/staff/leaverequest.module';
+import { Leaverequest } from './modules/staff/leaverequest/entities/leaverequest.entity';
 
 @Module({
   imports: [
@@ -21,13 +23,14 @@ import { AttendanceModule } from './modules/staff/attendance.module';
         username: config.get<string>('database.username'),
         password: config.get<string>('database.password'),
         database: config.get<string>('database.database'),
-        entities: [Attendance],
+        entities: [Attendance, Leaverequest],
         synchronize: false,
         migrations: ['dist/migrations/*{.ts,.js}'],
         migrationsRun: true,
       }),
     }),
     AttendanceModule,
+    LeaveRequestModule,
   ],
   // controllers: [AttendanceController],
   // providers: [AppService],
