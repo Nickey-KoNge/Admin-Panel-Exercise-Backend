@@ -14,6 +14,9 @@ export class LeaverequestServiceImpl implements ILeaverequestService {
     @Inject(LEAVEREQUEST_REPOSITORY)
     private readonly repo: ILeaverequestRepository,
   ) {}
+  findAll(): Promise<Leaverequest[]> {
+    return this.repo.findAll();
+  }
 
   create(dto: CreateLeaverequestDto): Promise<Leaverequest> {
     return this.repo.create(dto);
@@ -26,5 +29,8 @@ export class LeaverequestServiceImpl implements ILeaverequestService {
     dto: Partial<UpdateLeaverequestDto>,
   ): Promise<Leaverequest> {
     return this.repo.update(id, dto);
+  }
+  remove(id: number): Promise<void> {
+    return this.repo.delete(id);
   }
 }

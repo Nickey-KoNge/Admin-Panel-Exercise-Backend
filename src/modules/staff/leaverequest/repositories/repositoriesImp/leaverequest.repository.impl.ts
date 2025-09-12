@@ -12,6 +12,9 @@ export class LeaverequestRepositoryImpl implements ILeaverequestRepository {
     @InjectRepository(Leaverequest)
     private readonly repo: Repository<Leaverequest>,
   ) {}
+  async findAll(): Promise<Leaverequest[]> {
+    return this.repo.find();
+  }
 
   async create(attendance: Partial<Leaverequest>): Promise<Leaverequest> {
     return this.repo.save(this.repo.create(attendance));
@@ -25,5 +28,8 @@ export class LeaverequestRepositoryImpl implements ILeaverequestRepository {
   ): Promise<Leaverequest> {
     await this.repo.update(id, attendance);
     return this.findById(id);
+  }
+  async delete(id: number): Promise<void> {
+    await this.repo.delete(id);
   }
 }

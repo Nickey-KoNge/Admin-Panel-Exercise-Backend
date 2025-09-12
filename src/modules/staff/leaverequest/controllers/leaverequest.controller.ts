@@ -8,6 +8,7 @@ import {
   Param,
   Post,
   Put,
+  Delete,
 } from '@nestjs/common';
 import { CreateLeaverequestDto } from '../dtos/create-leaverequest.dto';
 import { ILeaverequestService } from '../services/leaverequest.service';
@@ -20,6 +21,10 @@ export class LeaverequestController {
     @Inject(LEAVEREQUEST_SERVICE)
     private readonly service: ILeaverequestService,
   ) {}
+  @Get()
+  findAll() {
+    return this.service.findAll();
+  }
 
   @Post()
   create(@Body() dto: CreateLeaverequestDto) {
@@ -33,5 +38,9 @@ export class LeaverequestController {
   @Put(':id')
   update(@Param('id') id: number, @Body() dto: UpdateLeaverequestDto) {
     return this.service.update(id, dto);
+  }
+  @Delete(':id')
+  remove(@Param('id') id: number) {
+    return this.service.remove(id);
   }
 }
