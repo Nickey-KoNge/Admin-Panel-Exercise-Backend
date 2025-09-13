@@ -30,4 +30,7 @@ export class UserServiceImpl implements IUserService {
   remove(id: number): Promise<void> {
     return this.repo.delete(id);
   }
+  findByEmail(email: string): Promise<User | null> {
+    return this.repo.findByEmail(email);
+  }
 }

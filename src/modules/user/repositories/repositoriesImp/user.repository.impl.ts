@@ -29,4 +29,7 @@ export class UserRepositoryImpl implements IUserRepository {
   async delete(id: number): Promise<void> {
     await this.repo.delete(id);
   }
+  async findByEmail(email: string): Promise<User | null> {
+    return this.repo.findOneBy({ email });
+  }
 }

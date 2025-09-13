@@ -10,4 +10,5 @@ export interface IUserService {
   findOne(id: number): Promise<User>;
   update(id: number, dto: Partial<UpdateUserDto>): Promise<User>;
   remove(id: number): Promise<void>;
+  findByEmail(email: string): Promise<User | null>;
 }

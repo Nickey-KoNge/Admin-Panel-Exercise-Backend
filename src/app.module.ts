@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import databaseConfig from './config/database.config';
@@ -14,6 +15,7 @@ import { Mode } from './modules/mode/entities/mode.entity';
 import { ModeModule } from './modules/mode/mode.module';
 import { Type } from './modules/type/entities/type.entity';
 import { TypeModule } from './modules/type/type.module';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -42,6 +44,7 @@ import { TypeModule } from './modules/type/type.module';
     UserModule,
     ModeModule,
     TypeModule,
+    AuthModule,
   ],
   // controllers: [AttendanceController],
   // providers: [AppService],

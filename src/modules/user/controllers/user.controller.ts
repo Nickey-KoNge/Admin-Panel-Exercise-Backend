@@ -8,18 +8,28 @@ import {
   Post,
   Put,
   Delete,
+  UseGuards,
+  Req,
 } from '@nestjs/common';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { IUserService } from '../services/user.service';
 import { USER_SERVICE } from '../constants/user.tokens';
 import { UpdateUserDto } from '../dtos/update-user.dto';
+import { JwtAuthGuard } from '../../../auth/jwt-auth.gard';
+import { User } from '../entities/user.entity';
 
 @Controller('user')
+@UseGuards(JwtAuthGuard)
 export class UserController {
   constructor(
     @Inject(USER_SERVICE)
     private readonly service: IUserService,
   ) {}
+  @Get('profile')
+  getProfile(@Req() req) {
+    return req.user; // JwtStrategy ထဲက payload ကိုရမယ်
+  }
+
   @Get()
   findAll() {
     return this.service.findAll();
@@ -41,5 +51,8 @@ export class UserController {
   @Delete(':id')
   remove(@Param('id') id: number) {
     return this.service.remove(id);
+  }
+  findByEmail(email: string): Promise<User | null> {
+    return this.service.findByEmail(email);
   }
 }
