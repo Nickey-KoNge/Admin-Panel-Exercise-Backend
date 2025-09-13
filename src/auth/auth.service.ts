@@ -24,7 +24,7 @@ export class AuthService {
   }
 
   async login(user: any) {
-    const payload = { username: user.email, sub: user.id, role: user.role_id };
+    const payload = { name: user.name, sub: user.id, role: user.role_id };
 
     const accessToken = this.jwtService.sign(payload, {
       secret: process.env.JWT_SECRET || 'accessSecret',
@@ -37,6 +37,12 @@ export class AuthService {
     });
 
     return {
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role_id: user.role_id,
+      },
       access_token: accessToken,
       refresh_token: refreshToken,
     };
@@ -49,7 +55,7 @@ export class AuthService {
       });
 
       const newAccessToken = this.jwtService.sign(
-        { username: payload.username, sub: payload.sub, role: payload.role },
+        { name: payload.name, sub: payload.sub, role: payload.role },
         {
           secret: process.env.JWT_SECRET || 'accessSecret',
           expiresIn: '1h',
