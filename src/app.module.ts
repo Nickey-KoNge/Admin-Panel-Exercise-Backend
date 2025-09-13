@@ -8,7 +8,8 @@ import { LeaveRequestModule } from './modules/staff/leaverequest.module';
 import { Leaverequest } from './modules/staff/leaverequest/entities/leaverequest.entity';
 import { Role } from './modules/role/entities/role.entity';
 import { RoleModule } from './modules/staff/role.module';
-
+import { User } from './modules/user/entities/user.entity';
+import { UserModule } from './modules/user/user.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -25,7 +26,7 @@ import { RoleModule } from './modules/staff/role.module';
         username: config.get<string>('database.username'),
         password: config.get<string>('database.password'),
         database: config.get<string>('database.database'),
-        entities: [Attendance, Leaverequest, Role],
+        entities: [Attendance, Leaverequest, Role, User],
         synchronize: false,
         migrations: ['dist/migrations/*{.ts,.js}'],
         migrationsRun: true,
@@ -34,6 +35,7 @@ import { RoleModule } from './modules/staff/role.module';
     AttendanceModule,
     LeaveRequestModule,
     RoleModule,
+    UserModule,
   ],
   // controllers: [AttendanceController],
   // providers: [AppService],
