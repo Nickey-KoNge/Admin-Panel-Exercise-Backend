@@ -15,10 +15,18 @@ export class Attendance {
   @IsNotEmpty()
   staff_id: number;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({
+    type: 'timestamp with time zone',
+    nullable: true,
+    name: 'check_in_time',
+  })
   check_in_time: Date;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({
+    type: 'timestamp with time zone',
+    nullable: true,
+    name: 'check_out_time',
+  })
   check_out_time: Date;
 
   @Column({ type: 'varchar', length: 50, default: 'pending' })

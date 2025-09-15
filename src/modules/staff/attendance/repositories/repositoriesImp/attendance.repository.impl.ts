@@ -12,6 +12,9 @@ export class AttendanceRepositoryImpl implements IAttendanceRepository {
     @InjectRepository(Attendance)
     private readonly repo: Repository<Attendance>,
   ) {}
+  async findAll(): Promise<Attendance[]> {
+    return this.repo.find();
+  }
 
   async create(attendance: Partial<Attendance>): Promise<Attendance> {
     return this.repo.save(this.repo.create(attendance));
@@ -25,5 +28,11 @@ export class AttendanceRepositoryImpl implements IAttendanceRepository {
   ): Promise<Attendance> {
     await this.repo.update(id, attendance);
     return this.findById(id);
+  }
+  async findLatestByUserId(userId: number): Promise<Attendance | null> {
+    return this.repo.findOne({
+      where: { staff_id: userId },
+      order: { check_in_time: 'DESC' },
+    });
   }
 }
