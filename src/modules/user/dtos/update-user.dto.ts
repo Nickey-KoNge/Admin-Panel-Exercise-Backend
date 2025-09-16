@@ -14,12 +14,4 @@ export class UpdateUserDto {
   @IsNumber()
   @IsNotEmpty()
   role_id: number;
-
-  @IsNotEmpty()
-  @IsString()
-  password: string;
-
-  @IsString()
-  @IsNotEmpty()
-  status: string;
 }

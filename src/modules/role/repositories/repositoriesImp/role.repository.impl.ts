@@ -11,6 +11,9 @@ export class RoleRepositoryImpl implements IRoleRepository {
     @InjectRepository(Role)
     private readonly repo: Repository<Role>,
   ) {}
+  async findAll(): Promise<Role[]> {
+    return this.repo.find();
+  }
   async create(role: Partial<Role>): Promise<Role> {
     return this.repo.save(this.repo.create(role));
   }

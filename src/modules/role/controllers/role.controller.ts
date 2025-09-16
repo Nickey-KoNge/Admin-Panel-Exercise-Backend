@@ -12,6 +12,10 @@ export class RoleController {
     @Inject(ROLE_SERVICE)
     private readonly service: IRoleService,
   ) {}
+  @Get()
+  findAll() {
+    return this.service.findAll();
+  }
 
   @Post()
   create(@Body() dto: CreateRoleDto) {

@@ -13,6 +13,9 @@ export class RoleServiceImpl implements IRoleService {
     @Inject(ROLE_REPOSITORY)
     private readonly repo: IRoleRepository,
   ) {}
+  findAll(): Promise<Role[]> {
+    return this.repo.findAll();
+  }
   create(dto: CreateRoleDto): Promise<Role> {
     return this.repo.create(dto);
   }

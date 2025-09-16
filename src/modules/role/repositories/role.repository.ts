@@ -2,6 +2,7 @@
 import { Role } from '../entities/role.entity';
 
 export interface IRoleRepository {
+  findAll(): Promise<Role[]>;
   create(role: Partial<Role>): Promise<Role>;
   findById(id: number): Promise<Role>;
 }
