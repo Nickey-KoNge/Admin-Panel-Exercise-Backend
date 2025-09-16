@@ -2,7 +2,7 @@
 
 import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
 import { CreateRoleDto } from '../dtos/create-role.dto';
-import { IRoleService } from '../services/role.service.impl';
+import { IRoleService } from '../services/role.service';
 import { ROLE_SERVICE } from '../constants/role.tokens';
 // import { UpdateLeaverequestDto } from '../dtos/update-leaverequest.dto';
 

@@ -11,6 +11,10 @@ export class TypeController {
     @Inject(TYPE_SERVICE)
     private readonly service: ITypeService,
   ) {}
+  @Get()
+  findAll() {
+    return this.service.findAll();
+  }
 
   @Post()
   create(@Body() dto: CreateTypeDto) {

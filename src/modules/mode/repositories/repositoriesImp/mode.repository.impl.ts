@@ -11,6 +11,10 @@ export class ModeRepositoryImpl implements IModeRepository {
     @InjectRepository(Mode)
     private readonly repo: Repository<Mode>,
   ) {}
+
+  async findAll(): Promise<Mode[]> {
+    return this.repo.find();
+  }
   async create(mode: Partial<Mode>): Promise<Mode> {
     return this.repo.save(this.repo.create(mode));
   }

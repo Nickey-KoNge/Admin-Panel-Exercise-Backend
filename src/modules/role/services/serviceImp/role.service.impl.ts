@@ -4,7 +4,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateRoleDto } from '../../dtos/create-role.dto';
 import { Role } from '../../entities/role.entity';
 import { IRoleRepository } from '../../repositories/role.repository';
-import { IRoleService } from '../role.service.impl';
+import { IRoleService } from '../role.service';
 import { ROLE_REPOSITORY } from '../../constants/role.tokens';
 
 @Injectable()

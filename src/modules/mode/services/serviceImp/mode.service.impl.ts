@@ -4,7 +4,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateModeDto } from '../../dtos/create-mode.dto';
 import { Mode } from '../../entities/mode.entity';
 import { IModeRepository } from '../../repositories/mode.repository';
-import { IModeService } from '../mode.service.impl';
+import { IModeService } from '../mode.service';
 import { MODE_REPOSITORY } from '../../constants/mode.tokens';
 
 @Injectable()
@@ -13,6 +13,9 @@ export class ModeServiceImpl implements IModeService {
     @Inject(MODE_REPOSITORY)
     private readonly repo: IModeRepository,
   ) {}
+  findAll(): Promise<Mode[]> {
+    return this.repo.findAll();
+  }
   create(dto: CreateModeDto): Promise<Mode> {
     return this.repo.create(dto);
   }

@@ -13,6 +13,9 @@ export class TypeServiceImpl implements ITypeService {
     @Inject(TYPE_REPOSITORY)
     private readonly repo: ITypeRepository,
   ) {}
+  findAll(): Promise<Type[]> {
+    return this.repo.findAll();
+  }
   create(dto: CreateTypeDto): Promise<Type> {
     return this.repo.create(dto);
   }

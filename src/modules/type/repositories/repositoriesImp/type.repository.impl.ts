@@ -11,6 +11,9 @@ export class TypeRepositoryImpl implements ITypeRepository {
     @InjectRepository(Type)
     private readonly repo: Repository<Type>,
   ) {}
+  async findAll(): Promise<Type[]> {
+    return this.repo.find();
+  }
   async create(type: Partial<Type>): Promise<Type> {
     return this.repo.save(this.repo.create(type));
   }
