@@ -27,7 +27,7 @@ export class UserController {
   ) {}
   @Get('profile')
   getProfile(@Req() req) {
-    return req.user; // JwtStrategy ထဲက payload ကိုရမယ်
+    return req.user;
   }
 
   @Get()
