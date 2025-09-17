@@ -1,5 +1,12 @@
 import { Type } from 'class-transformer';
-import { IsDate, IsNotEmpty, IsString, IsNumber } from 'class-validator';
+import {
+  IsDate,
+  IsNotEmpty,
+  IsString,
+  IsNumber,
+  IsArray,
+  IsDateString,
+} from 'class-validator';
 
 export class UpdateLeaverequestDto {
   @IsNumber()
@@ -22,10 +29,10 @@ export class UpdateLeaverequestDto {
   @IsNotEmpty()
   noofday: number;
 
-  @IsDate()
-  @Type(() => Date)
+  @IsArray()
+  @IsDateString({}, { each: true })
   @IsNotEmpty()
-  requestDate: Date;
+  requestDate: string[];
 
   @IsDate()
   @Type(() => Date)

@@ -10,8 +10,9 @@ import {
   LEAVEREQUEST_REPOSITORY,
   LEAVEREQUEST_SERVICE,
 } from './leaverequest/constants/leaverequest.tokens';
+import { LeaveType } from './leaverequest/entities/leave-type.entity';
 @Module({
-  imports: [TypeOrmModule.forFeature([Leaverequest])],
+  imports: [TypeOrmModule.forFeature([Leaverequest, LeaveType])],
   controllers: [LeaverequestController],
   providers: [
     { provide: LEAVEREQUEST_SERVICE, useClass: LeaverequestServiceImpl },

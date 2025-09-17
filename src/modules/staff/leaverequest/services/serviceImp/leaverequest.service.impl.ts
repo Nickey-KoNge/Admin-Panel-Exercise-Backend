@@ -1,4 +1,4 @@
-//src/modules/staff/leaverequest/services/serviceImp/attendance.service.impl.ts
+//src/modules/staff/leaverequest/services/serviceImp/leaverequest.service.impl.ts
 
 import { Injectable, Inject } from '@nestjs/common';
 import { CreateLeaverequestDto } from '../../dtos/create-leaverequest.dto';
@@ -7,6 +7,7 @@ import { ILeaverequestRepository } from '../../repositories/leaverequest.reposit
 import { ILeaverequestService } from '../leaverequest.service';
 import { LEAVEREQUEST_REPOSITORY } from '../../constants/leaverequest.tokens';
 import { UpdateLeaverequestDto } from '../../dtos/update-leaverequest.dto';
+import { LeaveType } from '../../entities/leave-type.entity';
 
 @Injectable()
 export class LeaverequestServiceImpl implements ILeaverequestService {
@@ -14,12 +15,25 @@ export class LeaverequestServiceImpl implements ILeaverequestService {
     @Inject(LEAVEREQUEST_REPOSITORY)
     private readonly repo: ILeaverequestRepository,
   ) {}
-  findAll(): Promise<Leaverequest[]> {
-    return this.repo.findAll();
-  }
+  async findAll(user: {
+    userId: number;
+    role: number;
+  }): Promise<Leaverequest[]> {
+    const isAdmin = user.role === 1;
 
+    if (isAdmin) {
+      return this.repo.findAll();
+    } else {
+      return this.repo.findByUserId(user.userId);
+    }
+  }
   create(dto: CreateLeaverequestDto): Promise<Leaverequest> {
-    return this.repo.create(dto);
+    const leaveRequestData = {
+      ...dto,
+      type: { id: dto.type } as LeaveType,
+    };
+
+    return this.repo.create(leaveRequestData);
   }
   findOne(id: number): Promise<Leaverequest> {
     return this.repo.findById(id);
@@ -28,7 +42,15 @@ export class LeaverequestServiceImpl implements ILeaverequestService {
     id: number,
     dto: Partial<UpdateLeaverequestDto>,
   ): Promise<Leaverequest> {
-    return this.repo.update(id, dto);
+    const { type, ...rest } = dto;
+    const updateData: Partial<Leaverequest> = {
+      ...rest,
+    };
+    if (type) {
+      updateData.type = { id: type } as LeaveType;
+    }
+
+    return this.repo.update(id, updateData);
   }
   remove(id: number): Promise<void> {
     return this.repo.delete(id);

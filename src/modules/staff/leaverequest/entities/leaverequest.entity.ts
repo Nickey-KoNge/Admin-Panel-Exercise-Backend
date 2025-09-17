@@ -1,7 +1,13 @@
-//src/modules/staff/leaverequest/entities/attendance.entity.ts
+//src/modules/staff/leaverequest/entities/leaverequest.entity.ts
 import { IsNotEmpty } from 'class-validator';
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import { LeaveType } from './leave-type.entity';
 @Entity('leaverequest')
 export class Leaverequest {
   @PrimaryGeneratedColumn()
@@ -11,9 +17,12 @@ export class Leaverequest {
   @IsNotEmpty()
   mode: number;
 
-  @Column({ type: 'int' })
-  @IsNotEmpty()
-  type: number;
+  @ManyToOne(() => LeaveType)
+  @JoinColumn({ name: 'type' })
+  type: LeaveType;
+  // @Column({ type: 'int' })
+  // @IsNotEmpty()
+  // type: number;
 
   @Column({ type: 'varchar', length: 255 })
   @IsNotEmpty()
@@ -27,8 +36,12 @@ export class Leaverequest {
   @IsNotEmpty()
   noofday: number;
 
-  @Column({ type: 'timestamp', nullable: true })
-  requestDate: Date;
+  @Column({
+    type: 'jsonb',
+    nullable: true,
+    name: 'requestDate',
+  })
+  requestDate: string[];
 
   @Column({ type: 'timestamp', nullable: true })
   submittedon: Date;
